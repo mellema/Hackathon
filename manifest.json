@@ -1,23 +1,21 @@
 {
   "name": "GroupedIn",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "manifest_version": 2,
-  "description" : "A Chrome extension that allows faster search for LinkedIn group members ",
-  "background": {
-  "scripts": ["background.js"],
-  "persistent": false
+  "permissions": ["tabs", "<all_urls>"],
+  "description": "LinkedIn Group Search Tool",
+  "browser_action": {
+    "default_icon": "compass-icon-19.png",
+    "default_popup": "popup.html"
   },
   "content_scripts": [
     {
-      "matches": ["https://www.linkedin.com/groups*"],
-      "js": ["content.js"]
+      "matches": [
+        "http://*/*",
+        "https://www.linkedin.com/groups?viewMembers*"
+      ],
+      "js": ["popup.js"],
+      "run_at": "document_end"         // pay attention to this line
     }
-  ],
-  "browser_action": {
-    "default_icon": {
-        "19": "19x19.gif"
-    },
-    "default_title": "That's the tool tip",
-    "default_popup": "popup.html"
-  }
+  ]
 }
